@@ -1,0 +1,166 @@
+  ####################################################
+ #            mapping experiment setting            #
+ ####################################################
+simulator:
+  ###------ define parameters for each simulation world ------###
+  world_name: gaussian_random_field
+ 
+  gaussian_random_field:
+    x_range: 500 # pixel
+    y_range: 500
+    gsd_x: 0.04 # m/pixel
+    gsd_y: 0.04
+    alpha: -6
+    hs_threshold: 0.7
+    color_map: "viridis"
+  
+  temperature_field:
+    path: #
+    x_range: 400 # pixel
+    y_range: 400
+    gsd_x: 0.05 # m/pixel
+    gsd_y: 0.05
+    hs_threshold: 0.7
+    color_map: "test"
+  
+  paddingstone_lake:
+    path: #
+    x_range: 400 # pixel
+    y_range: 400
+    gsd_x: 0.05 # m/pixel
+    gsd_y: 0.05
+    hs_threshold: 0.7
+    color_map: "test"
+
+agent_list:
+  FR-IDP:
+    planner_name: "lawn_mower"
+    mapper_name: 'fr-idp'
+    sensor_name: 'camera'
+
+  AR-IDP:
+    planner_name: 'lawn_mower'
+    mapper_name: 'ar-idp'
+    sensor_name: 'camera'
+  
+  AR-BCM:
+    planner_name: 'lawn_mower'
+    mapper_name: 'ar-bcm'
+    sensor_name: 'camera'
+  
+  AR-GPR-IK:
+    planner_name: 'lawn_mower'
+    mapper_name: 'ar-gpr-ik'
+    sensor_name: 'camera'
+
+  FR-GPF:
+    planner_name: 'lawn_mower'
+    mapper_name: 'fr-gpf'
+    sensor_name: 'camera'
+  
+  AR-GPF-IK:
+    planner_name: 'lawn_mower'
+    mapper_name: 'ar-gpf-ik'
+    sensor_name: 'camera'
+
+analysis_tool:
+  task_type: "mapping"
+    
+
+ ####################################################
+ #               agent module setting               #
+ ####################################################
+sensor:
+  ###------ define parameters for each sensor candidate ------###
+  camera:
+    x_angle: 45 # degree
+    y_angle: 45
+    x_resolution: 20 # pixel
+    y_resolution: 20
+    noise_coeff: 0.03
+    
+planner:
+  ###------ define parameters for each planner candidate ------###
+  lawn_mower:
+    budget_type: 'step'
+    budget: 16 # step
+    flight_speed: 1 # m/s
+    step_length: 5 # m
+    start_pose: [0, 0, 0] # m
+    x_boundary: 20 # ground_truth[x_range] * ground_truth[gsd_x] 
+    y_boundary: 20 # ground_truth[y_range] * ground_truth[gsd_y] 
+
+  greedy:
+    budget_type: 'execution_time'
+    budget: 100 # s
+    flight_speed: 1.2 # m/s
+    start_pose: [0, 0, 0]
+    x_boundary: 20 
+    y_boundary: 20
+    prediction_horizon: 1
+    altitude_level: [2, 5] # meters
+    waypoint_distance: 2 # meters
+
+mapper:
+  ###------ define parameters for each mapper candidate ------###
+  fr-idp: # fixed resolution under independence assumption
+    x_boundary: 20
+    y_boundary: 20
+    x_resolution: 32
+    y_resolution: 32
+    f_prior: 0.5
+    v_prior: 5
+    record_metrics: false
+
+  ar-idp: # adaptive resolution under independence assumption
+    x_boundary: 20
+    y_boundary: 20
+    max_depth: 5
+    split_degree: 2
+    f_prior: 0.5
+    v_prior: 5
+    record_metrics: false
+    merging_threshold: 0.7
+
+  ar-bcm: # adaptive resolution Bayesian Committee Machine
+    x_boundary: 20
+    y_boundary: 20
+    max_depth: 5
+    split_degree: 2
+    f_prior: 0.5
+    v_prior: 5
+    l: 2.73
+    record_metrics: false
+    merging_threshold: 0.7
+  
+  ar-gpr-ik: # adaptive resolution Gaussian Process regression with integral kernel
+    x_boundary: 20
+    y_boundary: 20
+    max_depth: 5
+    split_degree: 2
+    f_prior: 0.5
+    v_prior: 5
+    l: 2.73
+    record_metrics: false
+    merging_threshold: 0.7
+  
+  fr-gpf: # fixed resolution Bayesian fusion
+    x_boundary: 20
+    y_boundary: 20
+    x_resolution: 32
+    y_resolution: 32
+    f_prior: 0.5
+    v_prior: 5
+    l: 2.73
+    record_metrics: false
+  
+  ar-gpf-ik: # adaptive resolution Bayesian fusion using integral kernel
+    x_boundary: 20
+    y_boundary: 20
+    max_depth: 5
+    split_degree: 2
+    f_prior: 0.5
+    v_prior: 5
+    l: 2.73
+    record_metrics: false
+    merging_threshold: 0.7
