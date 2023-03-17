@@ -92,8 +92,8 @@ planner:
 
   greedy:
     budget_type: 'execution_time'
-    budget: 100 # s
-    flight_speed: 1.2 # m/s
+    budget: 300 # s
+    flight_speed: 1.0 # m/s
     start_pose: [0, 0, 0]
     x_boundary: 20 
     y_boundary: 20
@@ -110,7 +110,6 @@ mapper:
     y_resolution: 32
     f_prior: 0.5
     v_prior: 5
-    record_metrics: false
 
   ar-idp: # adaptive resolution under independence assumption
     x_boundary: 20
@@ -119,7 +118,6 @@ mapper:
     split_degree: 2
     f_prior: 0.5
     v_prior: 5
-    record_metrics: false
     merging_threshold: 0.7
 
   ar-bcm: # adaptive resolution Bayesian Committee Machine
@@ -130,7 +128,6 @@ mapper:
     f_prior: 0.5
     v_prior: 5
     l: 2.73
-    record_metrics: false
     merging_threshold: 0.7
   
   ar-gpr-ik: # adaptive resolution Gaussian Process regression with integral kernel
@@ -141,7 +138,6 @@ mapper:
     f_prior: 0.5
     v_prior: 5
     l: 2.73
-    record_metrics: false
     merging_threshold: 0.7
   
   fr-gpf: # fixed resolution Bayesian fusion
@@ -152,7 +148,6 @@ mapper:
     f_prior: 0.5
     v_prior: 5
     l: 2.73
-    record_metrics: false
   
   ar-gpf-ik: # adaptive resolution Bayesian fusion using integral kernel
     x_boundary: 20
@@ -162,5 +157,4 @@ mapper:
     f_prior: 0.5
     v_prior: 5
     l: 2.73
-    record_metrics: false
     merging_threshold: 0.7
