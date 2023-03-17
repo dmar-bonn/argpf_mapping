@@ -12,7 +12,6 @@ class FR_IDP(FR_Mapper):
         self.y_resolution = cfg["y_resolution"]
         self.f_prior = cfg["f_prior"]
         self.v_prior = cfg["v_prior"]
-        self.record_metrics = cfg["record_metrics"]
 
         # ground truth information
         self.gt_X = None

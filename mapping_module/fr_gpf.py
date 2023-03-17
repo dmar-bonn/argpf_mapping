@@ -14,7 +14,6 @@ class FR_GPF(FR_Mapper):
         self.f_prior = cfg["f_prior"]
         self.v_prior = cfg["v_prior"]
         self.l = cfg["l"]
-        self.record_metrics = cfg["record_metrics"]
 
         # ground truth information
         self.gt_X = None

@@ -11,7 +11,6 @@ class AR_IDP(AR_Mapper):
         self.f_prior = cfg["f_prior"]
         self.v_prior = cfg["v_prior"]
         self.split_degree = cfg["split_degree"]
-        self.record_metrics = cfg["record_metrics"]
         self.merging_th = cfg["merging_threshold"]
 
         # ground truth information

@@ -14,7 +14,6 @@ class AR_GPR_IK(AR_Mapper):
         self.v_prior = cfg["v_prior"]
         self.l = cfg["l"]
         self.split_degree = cfg["split_degree"]
-        self.record_metrics = cfg["record_metrics"]
         self.merging_th = cfg["merging_threshold"]
 
         # ground truth information
