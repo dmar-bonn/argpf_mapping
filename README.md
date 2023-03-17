@@ -15,14 +15,17 @@ cd argpf_mapping
 conda env create -f environment.yaml
 conda activate argpf_mapping
 ```
-## Mapping Experiment
+## Run Experiment
+for running mapping experiments:
 ```commandline
 python main.py -E mapping
 ```
-## Planning Experiment
+for planning experiments:
 ```commandline
-python main.py -E planning
+python main.py -E planning --record_metrics
 ```
+
+the configuration files for experimental setup can be found in config folder. Note that the slow running time is due to analysing experiment data. If the data analysis is not needed, use --test_run in commandline. For planning experiment, we record metrics after each map update to get the metrics development over mission time, which is pretty slow. You can omit record_metrics in commandline to avoid this.
 ## Maintainer
 Liren Jin, ljin@uni-bonn.de
 ## Citation

@@ -11,7 +11,7 @@ def get_sensor(cfg, sensor_name):
     if isinstance(sensor_cfg, dict):
 
         if sensor_name in SENSOR_LIST:
-            logger.info(f"instantiate {sensor_name}\n")
+            logger.info(f"------instantiate {sensor_name}\n")
             if sensor_name == "camera":
                 return Camera(sensor_cfg[sensor_name])
         else:

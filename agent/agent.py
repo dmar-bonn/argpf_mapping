@@ -8,6 +8,7 @@ class Agent:
         self.rmse_history = [0.3]  # for hotspot defined as value > 0.7
         self.recall_history = [0]
         self.iou_history = [0]
+        self.record_metrics = False
         self.move_to_starting_pose()
 
     # initialize planner and sensor pose
@@ -28,20 +29,20 @@ class Agent:
         time_consumption = planning_time + flight_time
         self.mission_timeline.append(self.mission_timeline[-1] + time_consumption)
         self.planner.budget_update(time_consumption)
-        print(next_pose, self.budget)
+        print("next pose:", next_pose, "remainning budget:", self.budget)
 
     # update map with ture measurments
     def update_map(self, measurment_data):
         self.mapper.update_map(measurment_data)
-        self.record_metrics_history()
+        if self.record_metrics:
+            self.record_metrics_history()
 
     # record rmse and recall during planning task
     def record_metrics_history(self):
-        if self.mapper.record_metrics:
-            rmse, recall, iou = self.mapper.evaluate_metrics()
-            self.rmse_history.append(rmse)
-            self.recall_history.append(recall)
-            self.iou_history.append(iou)
+        rmse, recall, iou = self.mapper.evaluate_metrics()
+        self.rmse_history.append(rmse)
+        self.recall_history.append(recall)
+        self.iou_history.append(iou)
 
     @property
     def budget(self):

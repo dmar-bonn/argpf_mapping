@@ -29,6 +29,7 @@ def main():
                 f"---------- start experiment: round{experiment_num}/{agent_name} ----------\n"
             )
             agent = get_agent(copy.deepcopy(cfg), agent_cfg)
+            agent.record_metrics = args.record_metrics
             simulator.run(agent)
             analysis_tool.record_experiment_data(agent, agent_name, experiment_num)
 
@@ -65,6 +66,9 @@ def parse_args():
 
     parser.add_argument(
         "--test_run", action="store_true", help="no analysis if in test_run mode"
+    )
+    parser.add_argument(
+        "--record_metrics", action="store_true", help="record metrics after each step"
     )
 
     args = parser.parse_args()
