@@ -6,7 +6,7 @@ import scipy
 
 def matrix_inverse(m):
     d = len(m)
-    m = 0.5 * np.add(m, np.transpose(m)) + 1e-10 * np.eye(d)
+    m = 0.5 * np.add(m, np.transpose(m)) + 1e-8 * np.eye(d)
     m = np.transpose(np.linalg.cholesky(m))
     m = np.linalg.inv(m)
     return np.dot(m, np.transpose(m))
